@@ -2,216 +2,133 @@ var express = require('express');
 
 var app = express();
 
-app.get('/tarjetas', (request, response) => {
-    response.send(tarjetas);
+app.post('/recover', (request, response) => {
+    response.send(recoverPaymentIntention);
 });
 
-app.get('/activos', (request, response) => {
-    response.send(activos);
+
+app.listen(3005, function () {
+    console.log('Example app listening on port 3005!');
 });
 
-app.listen(3000, function () {
-    console.log('Example app listening on port 3000!');
-});
-
-const tarjetas = {
-    "id": "",
-    "status": 200,
-    "resource": "/api/v1.0/tarjetas",
-    "data": [
-        {
-            "id_tarjeta": 28,
-            "numero_tarjeta": "xxxx xxxx xxxx 7934",
-            "fecha_emision_tarjeta": "2005-01-26",
-            "fecha_activacion": "2005-02-11",
-            "logo": {
-                "idLogo": 2,
-                "codigoLogo": "922",
-                "descripcionLogo": "SANTA ISABEL"
+const recoverPaymentIntention = {
+    "payload": {
+        "uuid": "f05a01d5-cf05-4317-aaa2-0f76e3806fa4",
+        "intention": {
+            "qr_type": "DYNAMIC",
+            "deferred_capture": false,
+            "description": "Falabella Cuarentena Integración",
+            "country": "CL",
+            "channel": "WEB",
+            "commerce": "Viajes",
+            "merchant_fantasy_name": "Falabella Cuarentena Integración",
+            "logo": "https://fifpaymentswallettest.blob.core.windows.net/application-logos/5e25ad490942f3001625c167_WALLET_QR_2020-05-11T16%3A36%3A13Z.png",
+            "purchase_order": "256894601",
+            "amount": {
+                "currency": "CLP",
+                "total": 666
             },
-            "rol": {
-                "codigoTitularidad": "10",
-                "titularidad": "TITULAR"
+            "item_list": {
+                "items": [
+                    {
+                        "sku": "TVLG43S",
+                        "name": "TVLG43",
+                        "description": "Tv LG 43",
+                        "quantity": 1,
+                        "price": 180000,
+                        "tax": 0
+                    }
+                ]
             },
-            "cuenta": {
-                "idCuenta": 14,
-                "numeroCuenta": "0006152902399527934",
-                "indicadorVigente": 1,
-                "fechaVencimientoFacturacion": "2014-01-02",
-                "diasMoraReal": 0,
-                "fechaUltActualizacion": "2018-03-15T17:38:35.603000000Z",
-                "fechaApertura": "2005-01-26",
-                "bloqueos_cuenta": {
-                    "idTipoBloqueoCuenta1": null,
-                    "codigoBloqueoCuenta1": null,
-                    "descripcionBloqueoCuenta1": null,
-                    "idTipoBloqueoCuenta2": null,
-                    "codigoBloqueoCuenta2": null,
-                    "descripcionBloqueoCuenta2": null
+            "shipping": {
+                "country": "CL",
+                "address": "Dirección Sucursal Falabella Ahumada",
+                "city": "Santiago",
+                "recipient_first_name": "Jhon Doe Son",
+                "recipient_last_name": "Jhon Doe Son",
+                "phone_number": "+56 9 8762 1244"
+            },
+            "redirect_urls": {
+                "return_url": "http://www.conntesol.org/wp-content/uploads/2018/03/PaymentSuccessful-1.png",
+                "cancel_url": "http://www.sclance.com/pngs/error-png/error_png_451017.jpg"
+            }
+        },
+        "payment_methods": [
+            {
+                "payment_type": "CARD",
+                "card_type": "CREDIT",
+                "on_us": false,
+                "name": "LAGARTOS PRUEBA TWO AND A HALF MAN",
+                "creation_date": "2021-07-02T15:16:05.655Z",
+                "card_uuid": "6bbc2b85-db48-11eb-846a-3e9cefc41e67",
+                "card_name": "LAGARTOS PRUEBA TWO AND A HALF MAN",
+                "card_description": "VISA CORPBANCA",
+                "default_card": false,
+                "first_6_digits": "443861",
+                "last_4_digits": "6777",
+                "expiration_month": "06",
+                "expiration_year": "2028",
+                "second_factor_req": false,
+                "selectable": true,
+                "color": "PREMIER",
+                "amount": {
+                    "currency": "CLP",
+                    "total": 666
                 },
-                "estado_autorizador_cuenta": {
-                    "codigoAutorizadorCuenta": "01",
-                    "idEstadoAutorizadorCuenta": 34,
-                    "descripcionAutorizador": "ACTIVA"
-                },
-                "saldos_cupos_cuenta": {
-                    "montoSaldoPendiente": 0.00,
-                    "cupoNacionalCupoVirtual": 226000.00,
-                    "deudaTotalNacional": 0.00,
-                    "dispoTotalEnClp": 226000.00,
-                    "dispoTotalEnUs": 0.00,
-                    "cupoTotalAvanceEfectivo": null,
-                    "dispoParaAvances": 22600.00
+                "bank": "CORPBANCA",
+                "brand": "VISA",
+                "card_status": "ACTIVE",
+                "installments": {
+                    "installments_offer": [
+                        "1",
+                        "2",
+                        "3",
+                        "4"
+                    ],
+                    "default_installment_number": "1",
+                    "installments_without_interest": [
+                        "1",
+                        "2"
+                    ]
                 }
             },
-            "bloqueos_tarjeta": {
-                "idTipoBloqueoTarjeta": 11,
-                "codigoBloqueoTarjeta": "S",
-                "descripcionBloqueoTarjeta": "Emisor"
-            },
-            "estado_autorizador_tarjeta": {
-                "idEstadoAutorizadorTarjeta": 11,
-                "codigoAutorizadorTarjeta": "11",
-                "descripcionAutorizadorTarjeta": "BLOQUEADA"
+            {
+                "payment_type": "P2P",
+                "name": "Saldo Fpay",
+                "creation_date": "2020-03-25",
+                "available_limit": 104, // este
+                "last_4_digits": "1234",
+                "second_factor_req": false,
+                "sufficient_amount": false, // ste 
+                "above_limit_per_sva_tx": false,
+                "amount": {
+                    "currency": "CLP",
+                    "total": 666
+                }
+            }
+        ],
+        "user_profile": {
+            "id": "EW1YBN4WSYFEW4CZSGRXXCYCZQMMMCFP",
+            "doc_number": "255143867",
+            "doc_type": "RUT",
+            "country": "cl",
+            "auth_type": "payments",
+            "customer_types": [],
+            "first_name": "María ",
+            "last_name": "García",
+            "email": "slastra@technisys.com",
+            "phones": [
+                {
+                    "country_code": "56",
+                    "region_id": "9",
+                    "number": "59886805",
+                    "full_number": "56959886805"
+                }
+            ],
+            "wallet_info": {
+                "account_id": 24175675
             }
         }
-    ],
-    "metadata": {
-        "page_number": "0",
-        "query_string": "filter=fecha_activacion=2005-02-11,id_cuenta=14&sort=fecha_activacion&page_number=0&page_size=3",
-        "page_size": "3"
     }
 };
 
-const activos = {
-    "maximo": 10,
-    "pagina": 0,
-    "cantidad_elementos": 2,
-    "contenido": [
-        {
-            "id": 4294585,
-            "tipo_activo": "TARJETA",
-            "imagen_activo": "/Content/img/logos/visa.gif",
-            "icono_bloqueo": "/Content/img/logos/visa_no_vigente.gif",
-            "vigencia": true,
-            "numero_cuenta": "xxxx xxxx xxxx 7243",
-            "rut_titular": "80008597",
-            "id_tarjeta": 7070733,
-            "numero_tarjeta": "xxxx xxxx xxxx 7243",
-            "numero_tarjeta_tac": "xxxx xxxx xxxx 7243",
-            "marca_tarjeta": "VISA",
-            "numero_cuenta_tac": null,
-            "estado_tarjeta": {
-                "codigo": "21",
-                "descripcion": "BLOQUEADA"
-            },
-            "saldo_pendiente": {
-                "valor": 0,
-                "moneda": "CLP",
-                "simbolo": "$"
-            },
-            "fecha_actualizacion_saldo_pendiente": "2020-03-09T00:00:00Z",
-            "fecha_ultimo_vencimiento": "0002-11-30T00:00:00Z",
-            "mora": 0,
-            "cupo_total": {
-                "valor": 15714285,
-                "moneda": "CLP",
-                "simbolo": "$"
-            },
-            "cupo_utilizado": {
-                "valor": 0,
-                "moneda": "CLP",
-                "simbolo": "$"
-            },
-            "cupo_disponible_compra": {
-                "valor": 15714285,
-                "moneda": "CLP",
-                "simbolo": "$"
-            },
-            "cupo_disponible_avance_efectivo": {
-                "valor": 15000000,
-                "moneda": "CLP",
-                "simbolo": "$"
-            },
-            "titularidad": "TITULAR",
-            "nombre_titular": {
-                "nombre": "NOMBRE",
-                "apellido": "TESTING"
-            },
-            "estado_cuenta": {
-                "codigo": "01",
-                "descripcion": "ACTIVA"
-            },
-            "fecha_actualizacion_datos": "2020-02-26T19:45:52Z",
-            "es_nueva": false,
-            "tiene_tarjeta_impresa": true,
-            "castigado": false,
-            "castigo": null,
-            "purgada": null,
-            "tipo_purga": null
-        },
-        {
-            "id": 4301468,
-            "tipo_activo": "TARJETA",
-            "imagen_activo": "/Content/img/logos/black.png",
-            "icono_bloqueo": "/Content/img/logos/black_nv.png",
-            "vigencia": true,
-            "numero_cuenta": "xxxx xxxx xxxx 1663",
-            "rut_titular": "80008597",
-            "id_tarjeta": 7081654,
-            "numero_tarjeta": "xxxx xxxx xxxx 1663",
-            "numero_tarjeta_tac": "xxxx xxxx xxxx 1663",
-            "marca_tarjeta": "BLACK",
-            "numero_cuenta_tac": null,
-            "estado_tarjeta": {
-                "codigo": "",
-                "descripcion": ""
-            },
-            "saldo_pendiente": {
-                "valor": 0,
-                "moneda": "CLP",
-                "simbolo": "$"
-            },
-            "fecha_actualizacion_saldo_pendiente": "2020-03-09T00:00:00Z",
-            "fecha_ultimo_vencimiento": null,
-            "mora": 0,
-            "cupo_total": {
-                "valor": 15000000,
-                "moneda": "CLP",
-                "simbolo": "$"
-            },
-            "cupo_utilizado": {
-                "valor": 0,
-                "moneda": "CLP",
-                "simbolo": "$"
-            },
-            "cupo_disponible_compra": {
-                "valor": 15000000,
-                "moneda": "CLP",
-                "simbolo": "$"
-            },
-            "cupo_disponible_avance_efectivo": {
-                "valor": 0,
-                "moneda": "CLP",
-                "simbolo": "$"
-            },
-            "titularidad": "TITULAR",
-            "nombre_titular": {
-                "nombre": "NOMBRE",
-                "apellido": "TESTING"
-            },
-            "estado_cuenta": {
-                "codigo": "-",
-                "descripcion": "-"
-            },
-            "fecha_actualizacion_datos": "2019-02-02T10:24:01Z",
-            "es_nueva": false,
-            "tiene_tarjeta_impresa": true,
-            "castigado": false,
-            "castigo": null,
-            "purgada": null,
-            "tipo_purga": null
-        }
-    ],
-    "cantidad_paginas": 1
-};
